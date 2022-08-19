@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        int i=0, n=chars.size();
+        int index = 0;
+        while(i<n){
+            int j=i+1;
+            while(j<n && chars[i]==chars[j]){
+                j++;
+            }
+            //either j==n or we found new char
+            chars[index++] = chars[i];
+            int count = j-i;
+            if(count > 1){
+                string str = to_string(count);
+                for(char ch: str){
+                    chars[index++] = ch;
+                }
+            }
+            i = j;
+        }
+        return index;
+    }
+};
