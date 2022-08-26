@@ -1,0 +1,46 @@
+//first approach
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        k = k%n;
+        vector<int> temp(n);
+        for(int i=0; i<n; i++){
+            temp[(i+k) % n] = nums[i];
+        }
+        nums = temp;
+    }
+};
+
+// second approach
+
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        k = k%n;
+        //divide array in two parts
+        int i=0, j=n-k-1;
+        
+        //reverse the first part
+        while(i<=j){
+            swap(nums[i], nums[j]);
+            i++, j--;
+        }
+        
+        //reverse the second part
+        i=n-k, j=n-1;
+        while(i<=j){
+            swap(nums[i], nums[j]);
+            i++, j--;
+        }
+        
+        //rotate the whole array
+        i=0, j=n-1;
+        while(i<=j){
+            swap(nums[i], nums[j]);
+            i++, j--;
+        }
+    }
+};
