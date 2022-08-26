@@ -1,0 +1,22 @@
+        temp %=10;
+        ans.push_back(temp);
+        i--;
+    }
+    while(j>=0){
+        int temp = b[j]+carry;
+        carry = temp/10;
+        temp %=10;
+        ans.push_back(temp);
+        j--;
+    }
+    if(carry){
+        ans.push_back(carry);
+    }
+    //reverse the ans array
+    int l = ans.size();
+    int k=0, t=l-1;
+    while(k<t){
+        swap(ans[k++],ans[t--]);
+    }
+    return ans;
+}
