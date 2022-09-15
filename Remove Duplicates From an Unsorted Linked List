@@ -1,0 +1,20 @@
+Node *removeDuplicates(Node *head)
+{
+    unordered_map<int,bool> m;
+    Node* prev = NULL;
+    Node* curr = head;
+    while(curr!=NULL){
+        if(m[curr->data]){
+            prev->next = curr->next;
+            Node* temp = curr;
+            curr = curr->next;
+            delete temp;
+        }
+        else{
+            m[curr->data]=true;
+            prev = curr;
+            curr = curr->next;
+        }
+    }
+    return head;
+}
