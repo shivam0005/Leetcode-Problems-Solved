@@ -1,0 +1,58 @@
+Node* findMiddle(Node* &head){
+    Node* temp = head;
+    Node* slow = head;
+    Node* fast = head->next;
+    while(fast!=NULL && fast->next!=NULL){
+        fast= fast->next->next;
+        slow = slow->next;
+    }
+    return slow;
+}
+
+void reverse(Node* &temp){
+    
+    Node* curr = temp;
+    Node* prev = NULL;
+    Node* next = NULL;
+    while(curr!=NULL){
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    temp = prev;
+}
+
+class Solution{
+  public:
+    //Function to check whether the list is palindrome.
+    bool isPalindrome(Node *head)
+    {
+        //Your code here
+        if(head==NULL || head->next==NULL){
+            return head;
+        }
+        
+        //find find the middle
+        
+        Node* mid = findMiddle(head);
+        Node* temp = mid->next;
+        
+        // revere the list after middle
+        
+        reverse(temp);
+        
+        //compare both halves
+        
+        Node* head1 = head;
+        Node* head2 = temp;
+        while(head2!=NULL){
+            if(head1->data != head2->data){
+                return 0;
+            }
+            head1 = head1->next;
+            head2 = head2->next;
+        }
+        return 1;
+    }
+};
