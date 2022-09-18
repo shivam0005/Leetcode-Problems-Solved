@@ -1,0 +1,27 @@
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+    
+        ListNode* fast = head;
+        while(n--){
+            fast = fast->next;
+        }
+        //if fast is null, then no. of nodes is equal to n
+        
+        if(!fast){
+            return head->next;
+        }
+        ListNode* slow = head;
+        while(fast->next!=NULL){
+            fast = fast->next;
+            slow = slow->next;
+        }
+        
+        //now slow is at prev node of nodetodelete
+        
+        ListNode* temp = slow->next;
+        slow->next = temp->next;
+        delete temp;
+        return head;
+    }
+};
