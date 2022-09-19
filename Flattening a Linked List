@@ -1,0 +1,37 @@
+Node* mergeList(Node* temp, Node* right){
+    Node* dummy = new Node(-1);
+    Node* res = dummy;
+    while(temp && right){
+        if(temp->data <= right->data){
+            dummy->bottom = temp;
+            temp = temp->bottom;
+            dummy = dummy->bottom;
+        }
+        else{
+            dummy->bottom = right;
+            right = right->bottom;
+            dummy = dummy->bottom;
+        }
+    }
+    
+    if(temp){
+        dummy->bottom = temp;
+    }
+    else{
+        dummy->bottom = right;
+    }
+    return res->bottom;
+}
+
+
+Node *flatten(Node *root)
+{
+   // Your code here
+   if(root==NULL || root->next==NULL) return root;
+   
+   Node* temp = root;
+   Node* right = flatten(root->next);
+   temp->next = NULL;
+   Node* ans = mergeList(temp,right);
+   return ans;
+}
